@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Panel Admin</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background: #f4f4f4;
+            margin: 0;
+            padding: 30px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .top-info {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background: black;
+            color: white;
+            padding: 8px;
+        }
+
+        td {
+            padding: 8px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        input, button {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+        }
+
+        button {
+            background: black;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #333;
+        }
+
+        a {
+            text-decoration: none;
+            margin: 0 5px;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            display: flex;
+            justify-content: space-between;
+            padding: 5px 0;
+        }
+
+        .logout {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .logout-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #e74c3c;
+            color: white;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
+        .logout-btn:hover {
+            background: #c0392b;
+        }
+
+        .estado {
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+<h1>📋 Panel Admin</h1>
+
+<div class="container">
+
+    <!-- 🔥 SELECTOR DE FECHA -->
+    <div class="top-info">
+        <form method="GET">
+            <input type="date" name="fecha" required>
+            <button type="submit">Ver ocupación</button>
+        </form>
+    </div>
+
+    <!-- 🔥 OCUPACIÓN POR DÍA -->
+    {% if fecha %}
+    <div class="top-info">
+        📅 <b>{{ fecha }}</b> → <b>{{ total_personas }} / {{ capacidad }}</b>
+
+        {% if total_personas < capacidad %}
+            <span style="color:green;">🟢 Hay espacio</span>
+        {% else %}
+            <span style="color:red;">🔴 Aforo completo</span>
+        {% endif %}
+    </div>
+    {% endif %}
+
+    <div class="grid">
+
+        <!-- 📅 RESERVAS -->
+        <div class="card">
+            <h2>📅 Reservas</h2>
+
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Teléfono</th>
+                    <th>Fecha</th>
+                    <th>Personas</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+
+                {% for r in reservas %}
+                <tr>
+                    <td>{{ r[0] }}</td>
+                    <td>{{ r[1] }}</td>
+                    <td>{{ r[2] }}</td>
+                    <td>{{ r[3] }}</td>
+                    <td>{{ r[4] }}</td>
+
+                    <!-- 🔥 ESTADO -->
+                    <td class="estado">
+                        {% if r[6] == 'pendiente' %}
+                            🟡 Pendiente
+                        {% elif r[6] == 'confirmada' %}
+                            🟢 Confirmada
+                        {% else %}
+                            🔴 Cancelada
+                        {% endif %}
+                    </td>
+
+                    <!-- 🔥 ACCIONES -->
+                    <td>
+                        <a href="/confirmar/{{ r[0] }}">✔️</a>
+                        <a href="/cancelar/{{ r[0] }}">❌</a>
+                        <a href="/borrar/{{ r[0] }}">🗑️</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+
+        <!-- 🚫 DÍAS CERRADOS -->
+        <div class="card">
+            <h2>🚫 Días cerrados</h2>
+
+            <form action="/cerrar_dia" method="POST">
+                <input type="date" name="fecha" required>
+                <button type="submit">Cerrar día</button>
+            </form>
+
+            <ul>
+                {% for d in dias_cerrados %}
+                <li>
+                    {{ d[1] }}
+                    <a href="/borrar_dia/{{ d[0] }}">❌</a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+    </div>
+
+    <!-- 🚪 LOGOUT -->
+    <div class="logout">
+        <a href="/logout" class="logout-btn">🚪 Cerrar sesión</a>
+    </div>
+
+</div>
+
+</body>
+</html>

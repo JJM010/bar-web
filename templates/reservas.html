@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Reservar mesa</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background: #f4f4f4;
+            margin: 0;
+            padding-top: 80px; /* 🔥 baja todo el contenido */
+        }
+
+        .box {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            width: 350px;
+            margin: auto;
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background: black;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #333;
+        }
+
+        .msg {
+            background: #d4edda;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        /* 🔹 botón volver más corto */
+        .home-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 15px;
+        }
+
+        .home-btn {
+            width: auto;              /* 🔥 no ocupa toda la pantalla */
+            padding: 8px 15px;
+            background: #eee;
+            color: black;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .home-btn:hover {
+            background: #ddd;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="box">
+
+    <h1>Reserva tu mesa </h1>
+
+    <!-- MENSAJE -->
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        {% for message in messages %}
+          <div class="msg">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <!-- FORMULARIO -->
+    <form action="/reservas" method="POST">
+
+        <input type="text" name="nombre" placeholder="Nombre" required>
+
+        <input type="text" name="telefono" placeholder="Teléfono" required>
+
+        <input type="datetime-local" name="fecha" required>
+
+        <input type="number" name="personas" placeholder="Número de personas" min="1" required>
+
+        <input type="email" name="email" placeholder="Tu email" required>
+
+        <button type="submit">Reservar</button>
+
+    </form>
+
+    <!-- 🔹 BOTÓN VOLVER -->
+    <div class="home-container">
+        <a href="/" class="home-btn">⬅ Volver al inicio</a>
+    </div>
+
+</div>
+
+</body>
+</html>

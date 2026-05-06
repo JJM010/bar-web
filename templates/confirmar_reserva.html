@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Confirmar reserva</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background: #f4f4f4;
+            text-align: center;
+            padding: 50px;
+        }
+
+        .box {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            display: inline-block;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            cursor: pointer;
+            border-radius: 6px;
+        }
+
+        .confirmar {
+            background: green;
+            color: white;
+        }
+
+        .cancelar {
+            background: red;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="box">
+
+    <h2>⚠️ Reserva duplicada</h2>
+
+    <p>Ya existe una reserva con este número en esa fecha.</p>
+
+    <form method="POST" action="/reservas">
+        <input type="hidden" name="nombre" value="{{ nombre }}">
+        <input type="hidden" name="telefono" value="{{ telefono }}">
+        <input type="hidden" name="fecha" value="{{ fecha }}">
+        <input type="hidden" name="personas" value="{{ personas }}">
+        <input type="hidden" name="confirmar" value="1">
+
+        <button class="confirmar">Reservar igualmente</button>
+    </form>
+
+    <a href="/reservas">
+        <button class="cancelar">Cancelar</button>
+    </a>
+
+</div>
+
+</body>
+</html>

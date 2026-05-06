@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Carta del Bar</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background: #f4f4f4;
+            margin: 0;
+            padding: 40px 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+        }
+
+        .section {
+            background: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.08);
+        }
+
+        .section h2 {
+            margin-top: 0;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        .item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px dashed #ddd;
+        }
+
+        .item:last-child {
+            border-bottom: none;
+        }
+
+        .name {
+            font-weight: bold;
+        }
+
+        .price {
+            color: #444;
+        }
+
+        .back {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            text-decoration: none;
+            background: lab(0% 0 0);
+            padding: 10px;
+            border-radius: 5px;
+            color: white;
+            width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .back:hover {
+            background: #ffffff;
+            color: #000000;
+            text-decoration: none;
+            border: 3px solid black;
+            border-radius: 8px;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+
+<body>
+
+<h1>🍸 Carta del Bar</h1>
+
+<div class="container">
+
+    <!-- 🥪 ALMUERZOS -->
+    <div class="section">
+        <h2>🥪 Almuerzos (9:00 a 11:30)</h2>
+      <div class="section">
+        <h2>Almuerzos con bebida y café</h2>
+        <div class="item">
+            <span class="name">Bocadillo</span>
+            <span class="price">6.50€</span>
+        </div>
+
+        <div class="item">
+            <span class="name">1/2 Bocadillo con bebida y café</span>
+            <span class="price">6.00€</span>
+        </div>
+
+        <div class="item">
+            <span class="name">Plato de vitrina</span>
+            <span class="price">6.50€</span>
+        </div>
+
+        <div class="item">
+            <span class="name">Plato combinado</span>
+            <span class="price">7.50€</span>
+        </div>
+
+        <div class="item">
+            <span class="name">Plato combinado</span>
+            <span class="price">7.50€</span>
+        </div>
+
+      </div>
+        
+      <div class="section">
+         
+         <h2>Productos individuales</h2>
+         <div class="item">
+            <span class="name">Tostada de aceite o tomate</span>
+            <span class="price">1.50€</span>
+         </div>
+
+         <div class="item">
+            <span class="name">Tostada de mantequilla o mermelada</span>
+            <span class="price">1.60€</span>
+         </div>
+
+         <div class="item">
+            <span class="name">Tostada de jamón o atún</span>
+            <span class="price">1.60€</span>
+         </div>
+
+         <div class="item">
+            <span class="name">Sandwich mixto</span>
+            <span class="price">3.00€</span>
+         </div>
+
+         <div class="item">
+            <span class="name">Montado</span>
+            <span class="price">4.00€</span>
+         </div>
+
+         <div class="item">
+            <span class="name">Bocadillo</span>
+            <span class="price">5.50€</span>
+         </div>
+
+         <div class="item">
+            <span class="name">1/2 Bocadillo</span>
+            <span class="price">4.50€</span>
+         </div>
+
+      </div>
+    </div>
+
+    <!-- 🍽 COMIDAS -->
+    <div class="section">
+        <h2>🍽️ Comidas</h2>
+       <div class="section">
+         <h2>Menú del día</h2>
+        <div class="item">
+            <span class="name">Menú (ensalada, primer y segundo plato, postre o café y una bebida)</span>
+            <span class="price">13.00€</span>
+        </div>
+       </div>
+       <div class="section">
+        <h2>Entrantes</h2>
+         <div class="item">
+            <span class="name">Queso frito</span>
+            <span class="price">10.00€</span>
+         </div>
+         <div class="item">
+            <span class="name">Queso plancha</span>
+            <span class="price">10.00€</span>
+         </div>
+         <div class="item">
+            <span class="name">Oreja</span>
+            <span class="price">9.00€</span>
+         </div>
+         <div class="item">
+            <span class="name">Forro</span>
+            <span class="price">8.00€</span>
+         </div>
+         <div class="item">
+            <span class="name">Magra con tomate</span>
+            <span class="price">9.00€</span>
+         </div>
+         <div class="item">
+            <span class="name">Jamón y queso</span>
+            <span class="price">12.00€</span>
+         </div>
+         <div class="item">
+            <span class="name">Ensaladilla rusa</span>
+            <span class="price">9.00€</span>
+         </div>
+         <div class="item">
+            <span class="name">Ensaladilla marisco</span>
+            <span class="price">10.00€</span>
+         </div>
+         <div class="item">
+            <span class="name">Calamares</span>
+            <span class="price">12.00€</span>
+         </div>
+         <div class="item">
+            <span class="name">Sepia</span>
+            <span class="price">13.00€</span>
+         </div>
+         <div class="item">
+            <span class="name">Bacalao</span>
+            <span class="price">12.00€</span>
+         </div>
+         <div class="item">
+            <span class="name">Boquerones</span>
+            <span class="price">12.00€</span>
+         </div>
+         <div class="item">
+            <span class="name">Pulpo a la gallega</span>
+            <span class="price">18.00€</span>
+         </div>
+         <div class="item">
+            <span class="name">Pulpo crujiente</span>
+            <span class="price">18.00€</span>
+         </div>
+         <div class="item">
+            <span class="name">Gambas al ajillo</span>
+            <span class="price">12.00€</span>
+         </div>
+         <div class="item">
+            <span class="name">Gamba plancha</span>
+            <span class="price">12.00€</span>
+         </div>
+         <div class="item">
+            <span class="name">Gambóm plancha</span>
+            <span class="price">12.00€</span>
+         </div>
+         <div class="item">
+            <span class="name">Patatas bravas</span>
+            <span class="price">8.00€</span>
+         </div>
+         <div class="item">
+            <span class="name">Berenjena con miel de caña</span>
+            <span class="price">8.00€</span>
+         </div>
+
+        </div>
+        <div class="section">
+         <h2>Plato combinado</h2>
+         <div class="item">
+            <span class="name">Plato combinado</span>
+            <span class="price">9.00€</span>
+         </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>🍷 Bebidas</h2>
+        <div class="section">
+         <h2>Refrescos</h2>
+         <div class="item">
+            <span class="name">Coca cola</span>
+            <span class="price">2.00€</span>
+         </div>
+         <div class="item">
+            <span class="name">Fanta</span>
+            <span class="price">2.00€</span>
+         </div>
+         <div class="item">
+            <span class="name">Aquarius</span>
+            <span class="price">2.00€</span>
+         </div>
+         <div class="item">
+            <span class="name">Nestea</span>
+            <span class="price">2.00€</span>
+         </div>
+         <div class="item">
+            <span class="name">Zumo</span>
+            <span class="price">2.00€</span>
+         </div>
+         <div class="item">
+            <span class="name">Zumo natural</span>
+            <span class="price">2.50€</span>
+         </div>
+         <div class="item">
+            <span class="name">Batido</span>
+            <span class="price">2.00€</span>
+         </div>
+         <div class="item">
+            <span class="name">Trina</span>
+            <span class="price">2.00€</span>
+         </div>
+         <div class="item">
+            <span class="name">Bio-Solan</span>
+            <span class="price">2.00€</span>
+         </div>
+         <div class="item">
+            <span class="name">7 UP</span>
+            <span class="price">2.00€</span>
+         </div>
+         <div class="item">
+            <span class="name">Tinto verano</span>
+            <span class="price">2.20€</span>
+         </div>
+         <div class="item">
+            <span class="name">Agua 1,5L</span>
+            <span class="price">1.50€</span>
+         </div>
+         <div class="item">
+            <span class="name">Agua 33cl</span>
+            <span class="price">1.00€</span>
+         </div>
+         <div class="item">
+            <span class="name">Agua con gas</span>
+            <span class="price">2.20€</span>
+         </div>
+         <div class="item">
+            <span class="name">Tónica</span>
+            <span class="price">2.00€</span>
+         </div>
+        </div>
+        <div class="section">
+         <h2>Cervezas</h2>
+         <div class="item">
+            <span class="name">Caña</span>
+            <span class="price">2.00€</span>
+         </div>
+         <div class="item">
+            <span class="name">Tubo</span>
+            <span class="price">2.00€</span>
+         </div>
+         <div class="item">
+            <span class="name">Jarra 600ml</span>
+            <span class="price">2.80€</span>
+         </div>
+         <div class="item">
+            <span class="name">Tercio</span>
+            <span class="price">2.20€</span>
+         </div>
+        </div>
+        <div class="section">
+         <h2>Vinos</h2>
+         <div class="item">
+            <span class="name">Copa de vino de la casa</span>
+            <span class="price">1.20€</span>
+         </div>
+         <div class="item">
+            <span class="name">Tubo de vino de la casa</span>
+            <span class="price">1.20€</span>
+         </div>
+         <div class="item">
+            <span class="name">Frasca 70cl de vino de la casa</span>
+            <span class="price">5.00€</span>
+         </div>
+         <div class="item">
+            <span class="name">Vino valdelamiel</span>
+            <span class="price">12.00€</span>
+         </div>
+         <div class="item">
+            <span class="name">Vino Antares</span>
+            <span class="price">12.00€</span>
+         </div>
+         <div class="item">
+            <span class="name">Vino serrador</span>
+            <span class="price">12.00€</span>
+         </div>
+        </div>
+        <div class="section">
+         <h2>Cafés</h2>
+         <div class="item">
+            <span class="name">Solo</span>
+            <span class="price">1.20€</span>
+         </div>
+         <div class="item">
+            <span class="name">Infusión</span>
+            <span class="price">1.20€</span>
+         </div>
+         <div class="item">
+            <span class="name">Cortado</span>
+            <span class="price">1.40€</span>
+         </div>
+         <div class="item">
+            <span class="name">Bombón</span>
+            <span class="price">1.60€</span>
+         </div>
+         <div class="item">
+            <span class="name">Con leche</span>
+            <span class="price">1.60€</span>
+         </div>
+         <div class="item">
+            <span class="name">Carajillo</span>
+            <span class="price">1.60€</span>
+         </div>
+         <div class="item">
+            <span class="name">Belmonte</span>
+            <span class="price">1.80€</span>
+         </div>
+         <div class="item">
+            <span class="name">Carajillo quemado</span>
+            <span class="price">2.20€</span>
+         </div>
+         <div class="item">
+            <span class="name">Colacao</span>
+            <span class="price">2.00€</span>
+         </div>
+    </div>
+</div>
+
+<a class="back" href="/">⬅ Volver al inicio</a>
+
+</body>
+</html>
