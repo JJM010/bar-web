@@ -23,7 +23,7 @@ def enviar_telegram(mensaje):
 
 # 📧 EMAIL
 EMAIL_USER = "barrestaurantevillarejos@gmail.com"
-EMAIL_PASS = "lqtg yzde xwkj mhzw"
+EMAIL_PASS = "oljn ijpj umie ljke"
 
 def enviar_email(destino, asunto, mensaje):
     try:
