@@ -9,7 +9,7 @@ app.secret_key = "bar_villarejosS"
 
 DB_PATH = "reservas.db"
 CAPACIDAD_MAXIMA = 80
-sqlite3.connect("reservas.db")
+
 # 🔔 TELEGRAM
 TELEGRAM_TOKEN = "8692038176:AAHSftSOrz99c0ztBXhySG15LwO0sj1fu_k"
 CHAT_ID = "7358799251"
