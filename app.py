@@ -26,17 +26,22 @@ EMAIL_USER = "barrestaurantevillarejos@gmail.com"
 EMAIL_PASS = "lqtg yzde xwkj mhzw"
 
 def enviar_email(destino, asunto, mensaje):
-    msg = MIMEText(mensaje)
-    msg["Subject"] = asunto
-    msg["From"] = EMAIL_USER
-    msg["To"] = destino
-
     try:
-        servidor = smtplib.SMTP("smtp.gmail.com", 587)
+        servidor = smtplib.SMTP("smtp.gmail.com", 587, timeout=10)
+        servidor.ehlo()
         servidor.starttls()
+        servidor.ehlo()
+
         servidor.login(EMAIL_USER, EMAIL_PASS)
+
+        msg = MIMEText(mensaje)
+        msg["Subject"] = asunto
+        msg["From"] = EMAIL_USER
+        msg["To"] = destino
+
         servidor.send_message(msg)
         servidor.quit()
+
     except Exception as e:
         print("Error enviando email:", e)
 
