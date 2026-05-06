@@ -9,7 +9,7 @@ app.secret_key = "bar_villarejosS"
 
 DB_PATH = "reservas.db"
 CAPACIDAD_MAXIMA = 80
-
+sqlite3.connect("reservas d.db")
 # 🔔 TELEGRAM
 TELEGRAM_TOKEN = "8692038176:AAHSftSOrz99c0ztBXhySG15LwO0sj1fu_k"
 CHAT_ID = "7358799251"
@@ -67,9 +67,14 @@ def init_db():
         )
     """)
 
+    conn = sqlite3.connect("reservas.db")
+    cursor = conn.cursor()
+
+    cursor.execute("CREATE TABLE IF NOT EXISTS reservas (...)")
+    cursor.execute("CREATE TABLE IF NOT EXISTS dias_cerrados (...)")
+
     conn.commit()
     conn.close()
-
 
 # =========================
 # 🏠 INICIO
@@ -404,4 +409,4 @@ def ubicacion():
 # =========================
 if __name__ == "__main__":
     init_db()
-    app.run(debug=True)
+    app.run(host="0.0.0.0")
