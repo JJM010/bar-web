@@ -401,6 +401,7 @@ def ubicacion():
 # =========================
 # 🚀 ARRANQUE
 # =========================
+init_db()  # <- esto es CLAVE
+
 if __name__ == "__main__":
-    init_db()
     app.run(host="0.0.0.0")
