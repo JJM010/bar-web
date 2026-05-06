@@ -67,12 +67,6 @@ def init_db():
         )
     """)
 
-    conn = sqlite3.connect("reservas.db")
-    cursor = conn.cursor()
-
-    cursor.execute("CREATE TABLE IF NOT EXISTS reservas (...)")
-    cursor.execute("CREATE TABLE IF NOT EXISTS dias_cerrados (...)")
-
     conn.commit()
     conn.close()
 
