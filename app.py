@@ -81,9 +81,6 @@ def init_db():
 def inicio(): 
     return render_template("index.html")
 
-@app.route("/contacto") 
-def contacto(): 
-    return render_template("contacto.html")
 
 # =========================
 # 🍽️ CARTA
