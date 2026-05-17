@@ -77,13 +77,13 @@ def init_db():
     conn.commit()
     conn.close()
 
-# =========================
-# 🏠 INICIO
-# =========================
-@app.route("/")
-def inicio():
+@app.route("/") 
+def inicio(): 
     return render_template("index.html")
 
+@app.route("/contacto") 
+def contacto(): 
+    return render_template("contacto.html")
 
 # =========================
 # 🍽️ CARTA
