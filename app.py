@@ -26,21 +26,23 @@ EMAIL_USER = "barrestaurantevillarejos@gmail.com"
 EMAIL_PASS = "oljn ijpj umie ljke"
 
 def enviar_email(destino, asunto, mensaje):
+
+    url = "https://api.emailjs.com/api/v1.0/email/send"
+
+    data = {
+        "service_id": "gmail_bar_villarejos",
+        "template_id": "template_8hpgg3v",
+        "user_id": "Hom3i2y1a7x0RFq81",
+        "template_params": {
+            "to_email": destino,
+            "subject": asunto,
+            "message": mensaje
+        }
+    }
+
     try:
-        servidor = smtplib.SMTP("smtp.gmail.com", 587, timeout=10)
-        servidor.ehlo()
-        servidor.starttls()
-        servidor.ehlo()
-
-        servidor.login(EMAIL_USER, EMAIL_PASS)
-
-        msg = MIMEText(mensaje)
-        msg["Subject"] = asunto
-        msg["From"] = EMAIL_USER
-        msg["To"] = destino
-
-        servidor.send_message(msg)
-        servidor.quit()
+        response = requests.post(url, json=data)
+        print("EMAILJS:", response.status_code, response.text)
 
     except Exception as e:
         print("Error enviando email:", e)
