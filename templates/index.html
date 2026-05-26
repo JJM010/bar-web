@@ -4,6 +4,8 @@
 
     <title>Bar Restaurante Villarejos</title>
 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <meta name="description" content="Bar Restaurante Villarejos. Reserva mesa online, consulta nuestra carta y ubicación.">
 
     <meta name="keywords" content="bar, restaurante, villarejos, reservas">
@@ -17,6 +19,10 @@
     <title>Bar Villarejos</title>
 
     <style>
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             margin: 0;
             font-family: Arial;
@@ -36,10 +42,11 @@
         }
 
         .menu a {
-            margin: 0 20px;
+            margin: 5px 10px;
             color: black;
             text-decoration: none;
             font-weight: bold;
+            display: inline-block;
         }
 
         .menu a:hover {
@@ -53,7 +60,7 @@
 
         .hero {
             text-align: center;
-            padding: 100px 20px;
+            padding: 120px 20px 80px 20px;
             background: url("/static/bar.jpg") no-repeat center;
             background-size: cover;
         }
@@ -86,15 +93,17 @@
 
         .card {
            background: white;
-           width: 250px;
+           width: 90%;
+           max-width: 250px;
            padding: 20px;
            border-radius: 15px;
            border: 1px solid black;
            transition: 0.3s;
-           margin-top: -100px;
+           margin-top: 20px;
            display: flex;
            flex-direction: column;
-           justify-content: space-between; /* 🔥 CLAVE */
+           justify-content: space-between;
+
         }
 
         .card:hover {
@@ -118,10 +127,6 @@
             margin: 20px 0;
             border: 2px solid black ;
             margin-top: 20px;
-        }
-
-        h1 {
-            margin-top: -125px;
         }
 
         .card a:hover {
@@ -164,6 +169,32 @@
         .admin-btn:hover {
             background: #333;
             transform: scale(1.1);
+        }
+
+        @media (max-width: 768px) {
+
+          .hero h1 {
+             font-size: 32px;
+          }
+
+          .menu {
+             padding: 10px;
+          }
+
+          .menu a {
+             margin: 5px;
+             font-size: 14px;
+          } 
+
+          .secciones {
+             flex-direction: column;
+             align-items: center;
+          }
+
+          img {
+             width: 95%;
+          }
+
         }
     </style>
 </head>
