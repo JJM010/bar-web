@@ -2,87 +2,123 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Estado de mi reserva</title>
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <title>Estado de tu reserva</title>
+
     <style>
+
         body {
             font-family: Arial;
             background: #f4f4f4;
-            padding: 30px;
             margin: 0;
+            padding: 20px;
         }
 
         .box {
-            max-width: 600px;
-            margin: auto;
             background: white;
-            padding: 20px;
+            padding: 25px;
             border-radius: 10px;
+            max-width: 500px;
+            margin: auto;
             box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
         }
 
-        h2 {
+        h1 {
             text-align: center;
+            margin-bottom: 20px;
         }
 
-        input, button {
+        input {
             width: 100%;
             padding: 10px;
-            margin-top: 10px;
-            font-size: 16px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
         }
 
         button {
+            width: 100%;
+            padding: 10px;
             background: black;
             color: white;
             border: none;
+            border-radius: 5px;
             cursor: pointer;
-            border-radius: 6px;
         }
 
         button:hover {
             background: #333;
         }
 
-        table {
-            width: 100%;
-            margin-top: 20px;
-            border-collapse: collapse;
-        }
-
-        th {
-            background: black;
-            color: white;
-            padding: 8px;
-        }
-
-        td {
-            padding: 8px;
-            text-align: center;
-            border-bottom: 1px solid #ddd;
-        }
-
         .msg {
+            background: #d4edda;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 15px;
             text-align: center;
-            font-weight: bold;
+        }
+
+        .reserva {
+            background: #f9f9f9;
+            padding: 15px;
             margin-top: 15px;
+            border-radius: 10px;
+            border-left: 5px solid black;
         }
 
-        .volver {
-            display: block;
-            border-bottom: 1px solid hwb(0 100% 0%);
-            text-align: center;
-            margin-top: 20px;
+        .cancel-btn {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 8px 15px;
+            background: #e74c3c;
+            color: white;
             text-decoration: none;
-            background: oklch(0% 0 0);
-            color: hsl(0, 100%, 100%);
-            padding: 8px;
-            font-weight: bold;
+            border-radius: 8px;
         }
 
-        .volver:hover {
-            text-decoration: underline;
+        .cancel-btn:hover {
+            background: #c0392b;
+        }
+
+        .home-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .home-btn {
+            width: auto;
+            padding: 8px 15px;
+            background: #eee;
+            color: black;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .home-btn:hover {
+            background: #ddd;
+        }
+
+        @media (max-width: 768px) {
+
+            body {
+                padding: 10px;
+            }
+
+            .box {
+                width: 100%;
+                padding: 20px;
+                box-sizing: border-box;
+            }
+
+            h1 {
+                font-size: 26px;
+            }
+
         }
 
     </style>
@@ -92,52 +128,79 @@
 
 <div class="box">
 
-    <h2>🔍 Estado de mi reserva</h2>
+    <h1>📋 Estado de tu reserva</h1>
 
+    <!-- MENSAJES -->
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        {% for message in messages %}
+          <div class="msg">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    {% if mensaje %}
+        <div class="msg">{{ mensaje }}</div>
+    {% endif %}
+
+    <!-- FORMULARIO -->
     <form method="POST">
-        <input type="text" name="telefono" placeholder="Introduce tu teléfono" required>
-        <button type="submit">Buscar</button>
+
+        <input type="text"
+               name="telefono"
+               placeholder="Introduce tu teléfono"
+               required>
+
+        <button type="submit">
+            Ver reservas
+        </button>
+
     </form>
 
-    <!-- 🔥 MENSAJE -->
-    {% if mensaje %}
-        <p class="msg">{{ mensaje }}</p>
-    {% endif %}
+    <!-- RESERVAS -->
+    {% for r in reservas %}
 
-    <!-- 🔥 TABLA -->
-    {% if reservas %}
+    <div class="reserva">
 
-    <table>
-        <tr>
-            <th>Nombre</th>
-            <th>Fecha</th>
-            <th>Personas</th>
-            <th>Estado</th>
-        </tr>
+        <h3>{{ r[1] }}</h3>
 
-        {% for r in reservas %}
-        <tr>
-            <td>{{ r[0] }}</td>
-            <td>{{ r[1] }}</td>
-            <td>{{ r[2] }}</td>
+        <p>📅 {{ r[2] }}</p>
 
-            <td>
-                {% if r[3] == 'pendiente' %}
-                    🟡 Aún no procesada
-                {% elif r[3] == 'confirmada' %}
-                    🟢 Confirmada
-                {% else %}
-                    🔴 Cancelada
-                {% endif %}
-            </td>
-        </tr>
-        {% endfor %}
+        <p>👥 {{ r[3] }} personas</p>
 
-    </table>
+        <p>
+            Estado:
 
-    {% endif %}
+            {% if r[4] == "pendiente" %}
+                🟡 Pendiente
 
-    <a class="volver" href="/">⬅ Volver a la web</a>
+            {% elif r[4] == "confirmada" %}
+                🟢 Confirmada
+
+            {% else %}
+                🔴 Cancelada
+            {% endif %}
+        </p>
+
+        {% if r[4] != "cancelada" %}
+        <a href="/cancelar_cliente/{{ r[0] }}"
+           class="cancel-btn">
+
+           ❌ Cancelar reserva
+
+        </a>
+        {% endif %}
+
+    </div>
+
+    {% endfor %}
+
+    <!-- VOLVER -->
+    <div class="home-container">
+        <a href="/" class="home-btn">
+            ⬅ Volver al inicio
+        </a>
+    </div>
 
 </div>
 

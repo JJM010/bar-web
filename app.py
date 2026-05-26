@@ -327,7 +327,7 @@ def estado():
         cursor = conn.cursor()
 
         cursor.execute("""
-            SELECT nombre, fecha, personas, estado
+            SELECT id, nombre, fecha, personas, estado
             FROM reservas
             WHERE telefono=?
             ORDER BY fecha DESC
@@ -342,6 +342,24 @@ def estado():
             mensaje = "📋 Aquí están tus reservas"
 
     return render_template("estado.html", reservas=reservas_cliente, mensaje=mensaje)
+
+@app.route("/cancelar_cliente/<int:id>")
+def cancelar_cliente(id):
+
+    conn = sqlite3.connect(DB_PATH)
+    cursor = conn.cursor()
+
+    cursor.execute(
+        "UPDATE reservas SET estado='cancelada' WHERE id=?",
+        (id,)
+    )
+
+    conn.commit()
+    conn.close()
+
+    flash("✅ Reserva cancelada correctamente")
+
+    return redirect(url_for("estado"))
 
 @app.route("/cerrar_dia", methods=["POST"])
 def cerrar_dia():
