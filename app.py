@@ -343,29 +343,27 @@ def estado():
 
     return render_template("estado.html", reservas=reservas_cliente, mensaje=mensaje)
 
-@app.route("/cerrar_dia", methods=["POST"])
-def cerrar_dia():
+@app.route("/borrar_dias", methods=["POST"])
+def borrar_dias():
 
     if not session.get("admin"):
         return redirect(url_for("login"))
 
-    fecha = request.form.get("fecha")
-
-    if not fecha:
-        return redirect(url_for("admin"))
+    dias = request.form.getlist("dias")
 
     conn = sqlite3.connect(DB_PATH)
     cursor = conn.cursor()
 
-    # evitar duplicados de días cerrados
-    cursor.execute("SELECT * FROM dias_cerrados WHERE fecha=?", (fecha,))
-    if cursor.fetchone() is None:
-        cursor.execute("INSERT INTO dias_cerrados (fecha) VALUES (?)", (fecha,))
-        conn.commit()
+    for dia_id in dias:
+        cursor.execute(
+            "DELETE FROM dias_cerrados WHERE id=?",
+            (dia_id,)
+        )
 
+    conn.commit()
     conn.close()
 
-    enviar_telegram(f"🚫 Día cerrado: {fecha}")
+    enviar_telegram("🗑️ Varios días reabiertos")
 
     return redirect(url_for("admin"))
 
