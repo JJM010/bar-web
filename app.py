@@ -401,30 +401,6 @@ def borrar_dia(id):
 
     return redirect(url_for("admin"))
 
-@app.route("/borrar_dias", methods=["POST"])
-def borrar_dias():
-
-    if not session.get("admin"):
-        return redirect(url_for("login"))
-
-    dias = request.form.getlist("dias")
-
-    conn = sqlite3.connect(DB_PATH)
-    cursor = conn.cursor()
-
-    for dia_id in dias:
-        cursor.execute(
-            "DELETE FROM dias_cerrados WHERE id=?",
-            (dia_id,)
-        )
-
-    conn.commit()
-    conn.close()
-
-    enviar_telegram("🗑️ Varios días reabiertos")
-
-    return redirect(url_for("admin"))
-
 @app.route("/logout")
 def logout():
 
