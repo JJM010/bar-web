@@ -349,32 +349,36 @@ def cerrar_dia():
     if not session.get("admin"):
         return redirect(url_for("login"))
 
-    fecha = request.form.get("fecha")
+    fechas = request.form.get("fechas")
 
-    if not fecha:
+    if not fechas:
         return redirect(url_for("admin"))
+
+    lista_fechas = fechas.split(", ")
 
     conn = sqlite3.connect(DB_PATH)
     cursor = conn.cursor()
 
-    # evitar duplicados
-    cursor.execute(
-        "SELECT * FROM dias_cerrados WHERE fecha=?",
-        (fecha,)
-    )
-
-    if cursor.fetchone() is None:
+    for fecha in lista_fechas:
 
         cursor.execute(
-            "INSERT INTO dias_cerrados (fecha) VALUES (?)",
+            "SELECT * FROM dias_cerrados WHERE fecha=?",
             (fecha,)
         )
 
-        conn.commit()
+        if cursor.fetchone() is None:
 
+            cursor.execute(
+                "INSERT INTO dias_cerrados (fecha) VALUES (?)",
+                (fecha,)
+            )
+
+    conn.commit()
     conn.close()
 
-    enviar_telegram(f"🚫 Día cerrado: {fecha}")
+    enviar_telegram(
+        f"🚫 Días cerrados: {', '.join(lista_fechas)}"
+    )
 
     return redirect(url_for("admin"))
 

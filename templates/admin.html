@@ -5,7 +5,12 @@
     <title>Panel Admin</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <!-- FLATPICKR -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
     <style>
+
         body {
             font-family: Arial;
             background: #f4f4f4;
@@ -58,10 +63,12 @@
             border-bottom: 1px solid #ddd;
         }
 
-        input, button {
+        input,
+        button {
             width: 100%;
             padding: 8px;
             margin-top: 5px;
+            box-sizing: border-box;
         }
 
         button {
@@ -88,7 +95,9 @@
         li {
             display: flex;
             justify-content: space-between;
+            align-items: center;
             padding: 5px 0;
+            border-bottom: 1px solid #eee;
         }
 
         .logout {
@@ -112,6 +121,33 @@
         .estado {
             font-weight: bold;
         }
+
+        /* 📱 MÓVIL */
+        @media (max-width: 768px) {
+
+            body {
+                padding: 10px;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            table {
+                font-size: 12px;
+            }
+
+            th,
+            td {
+                padding: 5px;
+            }
+
+            .top-info {
+                font-size: 15px;
+            }
+
+        }
+
     </style>
 </head>
 
@@ -123,32 +159,54 @@
 
     <!-- 🔥 SELECTOR DE FECHA -->
     <div class="top-info">
+
         <form method="GET">
+
             <input type="date" name="fecha" required>
-            <button type="submit">Ver ocupación</button>
+
+            <button type="submit">
+                Ver ocupación
+            </button>
+
         </form>
+
     </div>
 
-    <!-- 🔥 OCUPACIÓN POR DÍA -->
+    <!-- 🔥 OCUPACIÓN -->
     {% if fecha %}
+
     <div class="top-info">
-        📅 <b>{{ fecha }}</b> → <b>{{ total_personas }} / {{ capacidad }}</b>
+
+        📅 <b>{{ fecha }}</b> →
+        <b>{{ total_personas }} / {{ capacidad }}</b>
 
         {% if total_personas < capacidad %}
-            <span style="color:green;">🟢 Hay espacio</span>
+
+            <span style="color:green;">
+                🟢 Hay espacio
+            </span>
+
         {% else %}
-            <span style="color:red;">🔴 Aforo completo</span>
+
+            <span style="color:red;">
+                🔴 Aforo completo
+            </span>
+
         {% endif %}
+
     </div>
+
     {% endif %}
 
     <div class="grid">
 
         <!-- 📅 RESERVAS -->
         <div class="card">
+
             <h2>📅 Reservas</h2>
 
             <table>
+
                 <tr>
                     <th>ID</th>
                     <th>Nombre</th>
@@ -160,59 +218,118 @@
                 </tr>
 
                 {% for r in reservas %}
+
                 <tr>
+
                     <td>{{ r[0] }}</td>
                     <td>{{ r[1] }}</td>
                     <td>{{ r[2] }}</td>
                     <td>{{ r[3] }}</td>
                     <td>{{ r[4] }}</td>
 
-                    <!-- 🔥 ESTADO -->
                     <td class="estado">
+
                         {% if r[6] == 'pendiente' %}
+
                             🟡 Pendiente
+
                         {% elif r[6] == 'confirmada' %}
+
                             🟢 Confirmada
+
                         {% else %}
+
                             🔴 Cancelada
+
                         {% endif %}
+
                     </td>
 
-                    <!-- 🔥 ACCIONES -->
                     <td>
+
                         <a href="/confirmar/{{ r[0] }}">✔️</a>
+
                         <a href="/cancelar/{{ r[0] }}">❌</a>
+
                         <a href="/borrar/{{ r[0] }}">🗑️</a>
+
                     </td>
+
                 </tr>
+
                 {% endfor %}
+
             </table>
+
         </div>
 
-        <!-- 🚫 DÍAS CERRADOS --> 
-         <div class="card"> 
-            <h2>🚫 Días cerrados</h2> 
-            <form action="/cerrar_dia" method="POST"> 
-                <input type="date" name="fecha" required> 
+        <!-- 🚫 DÍAS CERRADOS -->
+        <div class="card">
+
+            <h2>🚫 Días cerrados</h2>
+
+            <!-- FORMULARIO -->
+            <form action="/cerrar_dia" method="POST">
+
+                <input
+                    type="text"
+                    id="fechas"
+                    name="fechas"
+                    placeholder="Selecciona uno o varios días"
+                    required
+                >
+
                 <button type="submit">
-                    Cerrar día
-                </button> 
-            </form> 
-            <ul> 
-                {% for d in dias_cerrados %} 
-                <li> 
-                    {{ d[1] }} 
-                    <a href="/borrar_dia/{{ d[0] }}">❌</a> 
-                </li> {% endfor %} </ul> </div>
+                    Cerrar días
+                </button>
+
+            </form>
+
+            <!-- LISTA -->
+            <ul>
+
+                {% for d in dias_cerrados %}
+
+                <li>
+
+                    {{ d[1] }}
+
+                    <a href="/borrar_dia/{{ d[0] }}">
+                        ❌
+                    </a>
+
+                </li>
+
+                {% endfor %}
+
+            </ul>
+
+        </div>
 
     </div>
 
     <!-- 🚪 LOGOUT -->
     <div class="logout">
-        <a href="/logout" class="logout-btn">🚪 Cerrar sesión</a>
+
+        <a href="/logout" class="logout-btn">
+            🚪 Cerrar sesión
+        </a>
+
     </div>
 
 </div>
+
+<!-- 🔥 CALENDARIO MULTIPLE -->
+<script>
+
+flatpickr("#fechas", {
+
+    mode: "multiple",
+    dateFormat: "Y-m-d"
+
+});
+
+</script>
 
 </body>
 </html>
