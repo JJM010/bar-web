@@ -189,54 +189,21 @@
             </table>
         </div>
 
-        <!-- 🚫 DÍAS CERRADOS -->
-        <div class="card">
-
-                <h2>🚫 Días cerrados</h2>
-
-                <!-- AÑADIR DÍA -->
-                <form action="/cerrar_dia" method="POST">
-
-                    <input type="date" name="fecha" required>
-
-                    <button type="submit">
-                     Cerrar día
-                    </button>
-
-                </form>
-
-                <!-- LISTA -->
-                <form action="/borrar_dias" method="POST">
-
-                    <ul>
-
-                        {% for d in dias_cerrados %}
-
-                      <li>
- 
-                         <label> 
-
-                            <input type="checkbox"
-                                   name="dias"
-                                   value="{{ d[0] }}">
-
-                           {{ d[1] }}
-
-                        </label>
-
-                      </li>
-
-                      {% endfor %}
-
-                    </ul>
-
-                    <button type="submit">
-                        🗑️ Borrar seleccionados
-                    </button>
-
-                </form>
-
-        </div>
+        <!-- 🚫 DÍAS CERRADOS --> 
+         <div class="card"> 
+            <h2>🚫 Días cerrados</h2> 
+            <form action="/cerrar_dia" method="POST"> 
+                <input type="date" name="fecha" required> 
+                <button type="submit">
+                    Cerrar día
+                </button> 
+            </form> 
+            <ul> 
+                {% for d in dias_cerrados %} 
+                <li> 
+                    {{ d[1] }} 
+                    <a href="/borrar_dia/{{ d[0] }}">❌</a> 
+                </li> {% endfor %} </ul> </div>
 
     </div>
 
